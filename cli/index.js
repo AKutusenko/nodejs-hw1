@@ -18,7 +18,6 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: рефакторить
 (async ({ action, id, name, email, phone }) => {
   try {
     switch (action) {
