@@ -38,6 +38,6 @@ const argv = program.opts();
         console.warn(chalk.red("Unknown action type!"));
     }
   } catch (error) {
-    console.error(chalk.red(error.messqge));
+    console.error(chalk.red(error.message));
   }
 })(argv);
