@@ -1,9 +1,14 @@
 const { Command } = require("commander");
 const chalk = require("chalk");
 const program = new Command();
-const { listContacts } = require("./contacts");
+const {
+  listContacts,
+  addContact,
+  getContactById,
+  removeContact,
+} = require("./contacts");
 program
-  .option("-a, --action <type>", "choose action")
+  .requiredOption("-a, --action <type>", "choose action")
   .option("-i, --id <type>", "user id")
   .option("-n, --name <type>", "user name")
   .option("-e, --email <type>", "user email")
@@ -23,15 +28,25 @@ const argv = program.opts();
         break;
 
       case "get":
-        // ... id
+        const contactById = await getContactById(id);
+        if (contactById) {
+          console.log(chalk.green("Contact found success"));
+          console.log(contactById);
+        } else {
+          console.log(chalk.yellow("Contact not found"));
+        }
         break;
 
       case "add":
-        // ... name email phone
+        const contact = await addContact(name, email, phone);
+        console.log(chalk.green("New contact added"));
+        console.log(contact);
         break;
 
       case "remove":
-        // ... id
+        const newContacts = await removeContact(id);
+        console.log(chalk.green("Contact has been deleted"));
+        console.table(newContacts);
         break;
 
       default:
