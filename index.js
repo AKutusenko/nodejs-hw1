@@ -38,13 +38,11 @@ const argv = program.opts();
 
       case "add":
         const contact = await addContact(name, email, phone);
-        console.log(chalk.green("New contact added"));
-        console.log(contact);
+        console.table(contact);
         break;
 
       case "remove":
         const newContacts = await removeContact(id);
-        console.log(chalk.green("Contact has been deleted"));
         console.table(newContacts);
         break;
 
